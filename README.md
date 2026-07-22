@@ -30,6 +30,7 @@ a complete Flutter reimplementation of the original native Android
 - Flutter stable with Dart 3.4 or newer
 - Java 17
 - Android SDK
+- Android Gradle Plugin 8.11.1 and Gradle 8.14.3
 
 Only Android is configured. The Android namespace and application ID are
 `com.jonas.ermert.top_downloads`, and the host code uses Java.
@@ -38,8 +39,13 @@ Only Android is configured. The Android namespace and application ID are
 
 ```shell
 flutter pub get
-flutter run
+flutter emulators --launch Pixel9
+flutter run -d emulator-5554
 ```
+
+The emulator ID shown by `flutter emulators` and the device ID shown by
+`flutter devices` are different identifiers. Launch the emulator first, then
+pass its device ID to `flutter run -d`.
 
 ## Quality checks
 

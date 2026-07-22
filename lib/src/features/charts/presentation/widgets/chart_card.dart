@@ -42,7 +42,9 @@ class ChartCard extends StatelessWidget {
                     child: Text(
                       '$rank',
                       style: TextStyle(
-                        color: rank <= 3 ? const Color(0xFF241B08) : scheme.onSurfaceVariant,
+                        color: rank <= 3
+                            ? const Color(0xFF241B08)
+                            : scheme.onSurfaceVariant,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
@@ -54,24 +56,9 @@ class ChartCard extends StatelessWidget {
                 tag: entry.id,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppRadius.lg),
-                  child: CachedNetworkImage(
+                  child: _Artwork(
                     imageUrl: entry.artworkUrl,
-                    width: 76,
-                    height: 76,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => ColoredBox(
-                      color: scheme.surfaceContainerHighest,
-                      child: const Center(
-                        child: SizedBox.square(
-                          dimension: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => ColoredBox(
-                      color: scheme.surfaceContainerHighest,
-                      child: const Icon(Icons.image_not_supported_outlined),
-                    ),
+                    backgroundColor: scheme.surfaceContainerHighest,
                   ),
                 ),
               ),
@@ -130,5 +117,46 @@ class ChartCard extends StatelessWidget {
         const SnackBar(content: Text('The store link could not be opened.')),
       );
     }
+  }
+}
+
+class _Artwork extends StatelessWidget {
+  const _Artwork({required this.imageUrl, required this.backgroundColor});
+
+  final String imageUrl;
+  final Color backgroundColor;
+
+  @override
+  Widget build(BuildContext context) {
+    if (imageUrl.isEmpty) {
+      return ColoredBox(
+        color: backgroundColor,
+        child: const SizedBox.square(
+          dimension: 76,
+          child: Icon(Icons.apps_rounded),
+        ),
+      );
+    }
+
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      width: 76,
+      height: 76,
+      fit: BoxFit.cover,
+      fadeInDuration: const Duration(milliseconds: 200),
+      placeholder: (context, url) => ColoredBox(
+        color: backgroundColor,
+        child: const Center(
+          child: SizedBox.square(
+            dimension: 20,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+        ),
+      ),
+      errorWidget: (context, url, error) => ColoredBox(
+        color: backgroundColor,
+        child: const Icon(Icons.image_not_supported_outlined),
+      ),
+    );
   }
 }

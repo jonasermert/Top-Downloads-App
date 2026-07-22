@@ -18,6 +18,8 @@ class ChartsRepository {
 
   final http.Client _client;
 
+  void close() => _client.close();
+
   Future<List<ChartEntry>> fetchChart({
     required ChartCategory category,
     required int limit,

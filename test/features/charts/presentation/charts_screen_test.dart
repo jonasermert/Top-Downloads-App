@@ -36,6 +36,8 @@ void main() {
 
     expect(find.text('Example App'), findsOneWidget);
     expect(find.text('Top 10'), findsOneWidget);
+    expect(find.byIcon(Icons.apps_rounded), findsWidgets);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
 
     await tester.tap(find.text('Songs'));
     await tester.pumpAndSettle();

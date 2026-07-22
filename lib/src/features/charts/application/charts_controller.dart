@@ -3,9 +3,11 @@ import 'package:top_downloads/src/features/charts/data/charts_repository.dart';
 import 'package:top_downloads/src/features/charts/domain/chart_category.dart';
 import 'package:top_downloads/src/features/charts/domain/chart_entry.dart';
 
-final chartsRepositoryProvider = Provider<ChartsRepository>(
-  (ref) => ChartsRepository(),
-);
+final chartsRepositoryProvider = Provider<ChartsRepository>((ref) {
+  final repository = ChartsRepository();
+  ref.onDispose(repository.close);
+  return repository;
+});
 
 final chartCategoryProvider = StateProvider<ChartCategory>(
   (ref) => ChartCategory.freeApps,

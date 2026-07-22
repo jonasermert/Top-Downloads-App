@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:top_downloads/src/core/theme/theme_tokens.dart';
 import 'package:top_downloads/src/features/charts/application/charts_controller.dart';
-import 'package:top_downloads/src/features/charts/domain/chart_category.dart';
 import 'package:top_downloads/src/features/charts/presentation/widgets/chart_card.dart';
 import 'package:top_downloads/src/features/charts/presentation/widgets/chart_header.dart';
 import 'package:top_downloads/src/features/charts/presentation/widgets/chart_states.dart';
